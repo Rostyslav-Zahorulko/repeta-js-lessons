@@ -227,7 +227,7 @@ const findFriendByName = function (allFriends, name) {
 console.log(findFriendByName(friends, 'Poly'));
 console.log(findFriendByName(friends, 'Chelsy'));
 
-// Пример: Получение имен всех друзей
+// Пример: получение имен всех друзей
 
 const getAllFriendsNames = function (allFriends) {
   const names = [];
@@ -243,7 +243,7 @@ const getAllFriendsNames = function (allFriends) {
 
 console.log(getAllFriendsNames(friends));
 
-// Пример: Получение имен друзей, которые онлайн
+// Пример: получение имен друзей, которые онлайн
 
 const getOnlineFriends = function (allFriends) {
   const names = [];

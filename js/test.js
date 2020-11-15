@@ -1,3 +1,13 @@
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+// 1. ДЕСТРУКТУРИЗАЦИЯ
+
+// Деструктуризация - это ...
+
+// __________________________________________________________________________________________________________________________
+
+// 1.1. Деструктуризация объекта
+
 // const client = {
 //   name: 'John',
 //   age: 45,
@@ -18,116 +28,126 @@
 //   family: { wife, son, daughter },
 // } = client;
 
-// console.log(name, age, profession, hobby, wife, son, daughter);
+// console.log("client's name: ", name); // John
+// console.log("client's age: ", age); // 45
+// console.log("client's proffesion: ", profession); // librarian
+// console.log("client's hobbies: ", hobby); // ['reading', 'playing football', 'watching TV'],
+// console.log("client's wife: ", wife);
+// console.log("client's son: ", son);
+// console.log("client's daughter: ", daughter);
 
 // const getInfoAboutClient = function () {
 //   console.log(
-//     `Client's name is ${name}. He is ${age} years old. He is a ${profession}. He likes ${hobby[0]}, ${hobby[1]} and ${hobby[2]}. His wife's name is ${wife}. He also has children: a son named ${son} and a daughter called ${daughter}`,
+//     `Client's name is ${name}.\nHe is ${age} years old.\nHe is a ${profession}.\nHe likes ${hobby[0]}, ${hobby[1]} and ${hobby[2]}.\nHis wife's name is ${wife}.\nHe also has children: a son named ${son} and a daughter called ${daughter}`,
 //   );
 // };
 
 // getInfoAboutClient();
 
-// // ************************************************************************************
+// __________________________________________________________________________________________________________________________
+
+// 1.2. Деструктуризация массива
 
 // const teams = ['Golden State', 'Chikago', 'Boston', 'Dallas', 'Los Angeles'];
 
-// console.log(teams[0]);
-// console.log(teams[1]);
-// console.log(teams[2]);
+// console.log('teams:', teams);
+// console.log('teams[0]: ', teams[0]);
+// console.log('teams[1]: ', teams[1]);
+// console.log('teams[2]: ', teams[2]);
+// console.log('teams[3]: ', teams[3]);
+// console.log('teams[4]: ', teams[4]);
 
 // const [team1, team2, team3, ...rest] = teams;
-// console.log(team1, team2, team3, rest);
-// console.log(teams);
 
-// // ************************************************************************************
+// console.log('team1: ', team1);
+// console.log('team2: ', team2);
+// console.log('team3: ', team3);
+// console.log('rest: ', rest);
 
-// let arr1 = [1, 2, 3];
-// let arr2 = [4, 5, 6];
-// let arr3 = arr1;
-// console.log(arr3);
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-// arr1.concat(arr2);
-
-// console.log(arr1);
-// console.log(arr3);
+// 2. МЕТОДЫ МАССИВА
 
 // const arr = [3, 5, 7];
-// console.log(arr);
+// console.log('arr: ', arr); // [3, 5, 7]
 
 // // Метод push() изменяет массив (добавляет в его конец один или несколько элементов) и возвращает его длинну
-// console.log(arr.push(9));
-// console.log(arr);
+// console.log(arr.push(9)); // 4
+// console.log('arr: ', arr); // [3, 5, 7, 9]
 
 // // Метод unshift() изменяет массив (добавляет один или несколько элементов в начало массива) и возвращает его длинну
-// console.log(arr.unshift(1));
-// console.log(arr);
+// console.log(arr.unshift(1)); // 5
+// console.log('arr: ', arr); // [1, 3, 5, 7, 9]
 
-// // // Метод pop() удаляет и возвращает последний элемент массива
-// console.log(arr.pop());
-// console.log(arr);
+// // Метод pop() удаляет и возвращает последний элемент массива
+// console.log(arr.pop()); // 9
+// console.log('arr: ', arr); // [1, 3, 5, 7]
 
-// // // Метод shift() удаляет первый элемент массива и возвращает его
-// console.log(arr.shift());
-// console.log(arr);
+// // Метод shift() удаляет первый элемент массива и возвращает его
+// console.log(arr.shift()); // 1
+// console.log('arr: ', arr); // [3, 5, 7]
 
 // const arr1 = [1, 2, 3];
-// console.log(arr1);
+// const arr2 = arr1;
 
-// const arr2 = arr1.slice();
-// console.log(arr2);
+// console.log('arr1: ', arr1); // [1, 2, 3]
+// console.log('arr2: ', arr2); // [1, 2, 3]
+// console.log('arr1 === arr2: ', arr1 === arr2); // true
 
-// console.log(arr1 === arr2);
+// const arr3 = arr1.slice();
+// console.log('arr3: ', arr3); // [1, 2, 3]
+// console.log('arr1 === arr3: ', arr1 === arr3); // false
 
-// arr1.push(4);
-// console.log(arr1);
+// const arr4 = arr1.concat();
+// console.log('arr4: ', arr4); // [1, 2, 3]
+// console.log('arr1 === arr4: ', arr1 === arr4); // false
 
-// console.log(arr2);
+// const arr5 = [...arr1];
+// console.log('arr5: ', arr5); // [1, 2, 3]
+// console.log('arr1 === arr5: ', arr1 === arr5); // false
 
-// **********************************************************************************
+// const slicedArr = arr1.slice(0, 2);
+// console.log('slicedArr: ', slicedArr); // [1, 2]
+// console.log('arr1: ', arr1); // [1, 2, 3]
 
-// function list(names) {
-//   let namesArr = [];
+// const arr6 = [4, 5, 6];
+// const concatedArr = arr1.concat(arr6);
+// console.log('concatedArr: ', concatedArr); // [1, 2, 3, 4, 5, 6]
+// console.log('arr1: ', arr1); // [1, 2, 3]
+// console.log('arr6: ', arr6); // [4, 5, 6]
 
-//   for (const name of names) {
-//     console.log(name.name);
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-//     namesArr.push(name.name);
+// Питання на заняття QnA (04.11.2020)
 
-//     console.log(namesArr);
-//   }
-//   return namesArr.join(' & ');
-// }
+const players = [
+  { id: 'player-1', name: 'Mango', timePlayed: 310, points: 54, online: false },
+  { id: 'player-2', name: 'Poly', timePlayed: 470, points: 92, online: true },
+  { id: 'player-3', name: 'Kiwi', timePlayed: 230, points: 48, online: true },
+  { id: 'player-4', name: 'Ajax', timePlayed: 150, points: 71, online: false },
+  { id: 'player-5', name: 'Chelsy', timePlayed: 80, points: 48, online: true },
+];
 
-// const simpsonsFamily = [{ name: 'Bart' }, { name: 'Lisa' }, { name: 'Maggie' }];
+// // Варіант 1. Оригінальний масив залишиться без змін
+// const updatedPlayers = players.map(player => {
+//   return { ...player, points: player.points + 10 };
+// });
 
-// console.log(list(simpsonsFamily));
+// console.table(players);
+// console.table(updatedPlayers);
 
-// **********************************************************************************
+// // Варіант 2. Оригінальний масив залишиться без змін
+// const updatedPlayers = players.map(player => {
+//   return Object.assign({}, player, { points: player.points + 10 });
+// });
 
-// function list(names) {
-//   let namesArr = [];
+// console.table(players);
+// console.table(updatedPlayers);
 
-//   for (const name of names) {
-//     console.log(name.name);
+// Варіант 3. Оригінальний масив зміниться
+const updatedPlayers = players.map(player => {
+  return Object.assign(player, { points: player.points + 10 });
+});
 
-//     namesArr.push(name.name);
-
-//     console.log(namesArr);
-//   }
-//   return namesArr.join(' & ');
-// }
-
-// const simpsonsFamily = [{ name: 'Bart' }, { name: 'Lisa' }, { name: 'Maggie' }];
-
-// console.log(list(simpsonsFamily));
-
-// _______________________________________
-
-// const test = function (fruit) {
-//   return fruit.isFresh;
-// }
-
-// test(element);
-
-// _______________________________________
+console.table(players);
+console.table(updatedPlayers);
