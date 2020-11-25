@@ -296,9 +296,9 @@
 //   .filter(player => player.isOnline)
 //   .sort((prevPlayer, nextPlayer) => prevPlayer.rank - nextPlayer.rank);
 
-console.table(players);
+// console.table(players);
 // Оригинальный массив не изменился, потому что метод sort() был вызван на результате вызова метода filter()
 
-console.table(onlineAndSorted);
+// console.table(onlineAndSorted);
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

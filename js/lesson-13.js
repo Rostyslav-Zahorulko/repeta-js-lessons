@@ -75,5 +75,7 @@ console.log(imageRef.hasAttribute('alt')); // true
 console.log(imageRef.getAttribute('alt')); // Yeah! It's really me
 imageRef.setAttribute('alt', "No doubt! It's me");
 console.log(imageRef.getAttribute('alt')); // No doubt! It's me
-console.log(imageRef); // <img src=​"../​images/​Conquistador.jpg" alt=​"No doubt! It's me" width=​"300px">​
-console.log(imageRef.attributes); // NamedNodeMap {0: src, 1: alt, 2: width, src: src, alt: alt, width: width, length: 3}
+console.log(imageRef); // <img src=​"./​images/​lesson-13/​conquistador.jpg" alt=​"No doubt! It's me" width=​"300px">
+console.log(imageRef.attributes); // NamedNodeMap {0: src, 1: alt, 2: width, src: src, alt: alt, width: width, length: 3}​
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

@@ -1,6 +1,6 @@
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-// І. СОЗДАНИЕ И УДАЛЕНИЕ СЛУШАТЕЛЯ СОБЫТИЙ
+// І. СЛУШАТЕЛь СОБЫТИЯ (EVENT LISTENER)
 
 // https://youtu.be/Q37hHgUYXeU
 
@@ -26,9 +26,9 @@ removeEventListenerBtnRef.addEventListener('click', () => {
 
 // https://youtu.be/Q37hHgUYXeU?t=574
 
-// В каждый переданый в addEventListener колбек по умолчанию будет приходить объект события
+// В каждый переданый в слушатель события колбек по умолчанию будет приходить объект события
 // Это служебный объект, который создается браузером, и хранит служебные свойства
-// Ссылка на него записывается в переменную с именем event, evt или e
+// Ссылка на него записывается в параметр (локальную переменную) с именем event, evt или e
 // Свойство event.target - ссылка на элемент, на котором произошло событие
 
 targetBtnRef.addEventListener('click', event => {
@@ -88,7 +88,7 @@ formRef.addEventListener('submit', event => {
 
 // __________________________________________________________________________________________________________________________
 
-// 3.1. Как собрать элементы формы
+// 3.1. Сбор элементов формы
 
 // https://youtu.be/Q37hHgUYXeU?t=1130
 
@@ -103,7 +103,7 @@ formRef.addEventListener('submit', event => {
 // Используется, если нужно собрать все значение элементов формы при submit'е в один объект
 // Он вызывается с помощью оператора new
 // Его аргумент - ссылка на элемент формы (event.target)
-// У этого конструктора есть метод forEach(), который работает немного иначе чем одноименный метод
+// У этого конструктора есть метод forEach(), который работает немного иначе, чем одноименный метод
 // В колбек функцию этого метода приходят значение и ключ
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -216,7 +216,7 @@ inputRef.addEventListener('blur', handleInputBlur);
 
 // VII. МАСТЕРСКАЯ: МОДАЛЬНОЕ ОКНО
 
-// https://youtu.be/Q37hHgUYXeU?t=4150
+// https://youtu.be/Q37hHgUYXeU?t=4265
 
 /*
  * Открытие и закрытие по клику по соответствующим кнопкам
@@ -260,6 +260,7 @@ inputRef.addEventListener('blur', handleInputBlur);
  *      снять с window слушатель события
  */
 
+/*
 const openModalBtnRef = document.querySelector('[data-action="open-modal"]');
 const closeModalBtnRef = document.querySelector('[data-action="close-modal"]');
 const backdropRef = document.querySelector('.js-backdrop');
@@ -291,4 +292,53 @@ function handleEscapePressing(event) {
   if (event.code === 'Escape') {
     handleModalClosing();
   }
+}
+*/
+
+// ПРОБА ПЕРА
+
+const refs = {
+  openModalBtn: document.querySelector('[data-action="open-modal"]'),
+  closeModalBtn: document.querySelector('[data-action="close-modal"]'),
+  backdrop: document.querySelector('.js-backdrop'),
+};
+
+refs.openModalBtn.addEventListener('click', handleClickOnOpenModalBtn);
+refs.closeModalBtn.addEventListener('click', handleClickOnCloseModalBtn);
+refs.backdrop.addEventListener('click', handleClickOnBackdrop);
+
+function handleClickOnOpenModalBtn() {
+  window.addEventListener('keydown', handlePressKeybordKey);
+
+  openModal();
+}
+
+function handleClickOnCloseModalBtn() {
+  window.removeEventListener('keydown', handlePressKeybordKey);
+
+  closeModal();
+}
+
+function handleClickOnBackdrop(event) {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+
+  closeModal();
+}
+
+function handlePressKeybordKey(event) {
+  if (event.code !== 'Escape') {
+    return;
+  }
+
+  closeModal();
+}
+
+function openModal() {
+  document.body.classList.add('show-modal');
+}
+
+function closeModal() {
+  document.body.classList.remove('show-modal');
 }
