@@ -1,6 +1,7 @@
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 // I. БОЛТЛИВЫЕ СОБЫТИЯ (CHATTY EVENTS). ПАТТЕРНЫ THROTTLE И DEBOUNCE
+
 // https://youtu.be/wz7jwzorJvQ?t=73
 
 // Болтливые события (БС) - события, которые происходят слишком часто
@@ -54,7 +55,7 @@ inputRef.addEventListener('input', event => {
 // https://youtu.be/wz7jwzorJvQ?t=262
 
 // Это дополнительный JS код, который притормаживает вызов callback функций слушателей болтливых событий
-// Он не приостанавливает создание самих событий в браузере, а ограничивает количество вызовов callback функций
+// Он не приостанавливает создание самих событий в браузере, а уменьшает количество вызовов callback функций
 
 // К таким событиям как mousemove или scroll применяется Throttle
 // Этот паттерн заставляет calback функцию вызываться не чаще чем 1 раз в n милисекунд
@@ -75,7 +76,7 @@ function handleMousemove(event) {
 window.addEventListener('mousemove', _.throttle(handleMousemove, 200));
 */
 
-// Можно так:
+// Или так:
 
 const coordsOutputRef = document.querySelector('.js-coords');
 let mousemoveCallbackCounter = 0;
@@ -89,7 +90,7 @@ const throttledMousemoveCallback = _.throttle(event => {
 
 window.addEventListener('mousemove', throttledMousemoveCallback);
 
-// Без Debounce вызов callback функций слушателей таких болтливых событий, как, например, input,
+// Вызов callback функций слушателей таких болтливых событий, как, например, input,
 // происходит каждый раз, когда происходит событие
 // Debounce останавливает вызов callback функции слушателя события на время, пока происходит событие
 // Callback функция будет вызвана только по прошествии (спустя) n милисекунд с момента окончания события,
@@ -115,7 +116,7 @@ function handleInput(event) {
 inputRef.addEventListener('input', _.debounce(handleInput, 300));
 */
 
-// Можно так:
+// Или так:
 
 const inputRef = document.querySelector('.js-input');
 const outputRef = document.querySelector('.js-output');
@@ -144,9 +145,7 @@ inputRef.addEventListener('input', debouncedInputCallback);
 // Target (цель) - элемент (прямоугольник), вхождение которого в Root мы отслеживаем
 // Intersection Observer (IO) - оповещает о том, что Target начал входить в Root
 
-// IO - это класс. Поэтому нужно создать экземпляр
-// entries - список пересечений
-
+/*
 const onEntry = (entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -164,6 +163,7 @@ const io = new IntersectionObserver(onEntry, options);
 const boxRef = document.querySelector('.js-box');
 
 io.observe(boxRef); // метод для указания элемента, за которым нужно наблюдать
+*/
 
 // __________________________________________________________________________________________________________________________
 
@@ -180,3 +180,48 @@ io.observe(boxRef); // метод для указания элемента, за
 // III. МАСТЕРСКАЯ: ЛЕНИВАЯ ЗАГРУЗКА ИЗОБРАЖЕНИЙ
 
 // https://youtu.be/wz7jwzorJvQ?t=2519
+
+// Для ленивой загрузки изображений используют Intersection Observer
+// Идея состоит в том, чтобы загружать изображения не все сразу, а по отдельности -
+// только тогда, когда они будут входить во вьюпорт (пересекатся с ним)
+// Вхождение изображений во вьюпорт можно отследить несколькими способами
+
+// __________________________________________________________________________________________________________________________
+
+// 3.1. Intersection Observer с unobserve (один на все изображения)
+
+// https://youtu.be/wz7jwzorJvQ?t=2944
+
+const onEntry = (entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(entry.target);
+
+      const image = entry.target;
+      const src = image.dataset.lazy;
+
+      image.src = src;
+      image.classList.add('appear');
+
+      observer.unobserve(image);
+    }
+  });
+};
+
+const options = {
+  rootMargin: '100px',
+};
+
+const io = new IntersectionObserver(onEntry, options);
+
+const images = document.querySelectorAll('.feed img');
+
+images.forEach(image => io.observe(image));
+
+// __________________________________________________________________________________________________________________________
+
+// 3.2. Intersection Observer с disconnect (по одному на каждое изображение)
+
+// https://youtu.be/wz7jwzorJvQ?t=3463
+
+// ...
