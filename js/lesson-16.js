@@ -136,16 +136,15 @@ inputRef.addEventListener('input', debouncedInputCallback);
 
 // II. НАБЛЮДАТЕЛЬ ЗА ПЕРЕСЕЧЕНИЕМ (INTERSECTION OBSERVER API)
 
-// https://youtu.be/wz7jwzorJvQ?t=1121
+// https://youtu.be/wz7jwzorJvQ?t=1122
 
-// Это современный API (набор методов), который позволяет определить, находится ли элемент во вьюпорте (видно ли его на странице),
-// отследить момент его вхождения во вьюпорт и т. д.
+// Intersection Observer API - это современный API (набор методов), который позволяет следить за
+// изменением пересечения элемента с его родителем или вьюпортом (областью видимости документа)
 
-// Root (корень) - элемент (прямоугольник), вхождение в который Target мы отслеживаем. По умолчанию, это Window (вьюпорт)
-// Target (цель) - элемент (прямоугольник), вхождение которого в Root мы отслеживаем
-// Intersection Observer (IO) - оповещает о том, что Target начал входить в Root
+// Observer (наблюдатель) - экземпляр класса IntersectionObserver, который отслеживает вхождение Target в Root
+// Root (корень) - элемент, вхождение Target в который отслеживает Observer. По умолчанию, это вьюпорт
+// Target (цель) - элемент, вхождение которого в Root отслеживает Observer
 
-/*
 const onEntry = (entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -156,14 +155,15 @@ const onEntry = (entries, observer) => {
   });
 };
 
-const options = { rootMargin: '50px' };
+const options = {
+  rootMargin: '50px',
+};
 
 const io = new IntersectionObserver(onEntry, options);
 
 const boxRef = document.querySelector('.js-box');
 
 io.observe(boxRef); // метод для указания элемента, за которым нужно наблюдать
-*/
 
 // __________________________________________________________________________________________________________________________
 
@@ -192,31 +192,35 @@ io.observe(boxRef); // метод для указания элемента, за
 
 // https://youtu.be/wz7jwzorJvQ?t=2944
 
-const onEntry = (entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      console.log(entry.target);
-
-      const image = entry.target;
-      const src = image.dataset.lazy;
-
-      image.src = src;
-      image.classList.add('appear');
-
-      observer.unobserve(image);
-    }
-  });
-};
-
-const options = {
-  rootMargin: '100px',
-};
-
-const io = new IntersectionObserver(onEntry, options);
-
 const images = document.querySelectorAll('.feed img');
 
-images.forEach(image => io.observe(image));
+const lazyLoad = targets => {
+  const onEntry = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // console.log(entry.target);
+
+        const image = entry.target;
+        const src = image.dataset.lazy;
+
+        image.src = src;
+        image.classList.add('appear');
+
+        observer.unobserve(image);
+      }
+    });
+  };
+
+  const options = {
+    rootMargin: '100px',
+  };
+
+  const io = new IntersectionObserver(onEntry, options);
+
+  targets.forEach(target => io.observe(target));
+};
+
+lazyLoad(images);
 
 // __________________________________________________________________________________________________________________________
 
@@ -224,4 +228,34 @@ images.forEach(image => io.observe(image));
 
 // https://youtu.be/wz7jwzorJvQ?t=3463
 
-// ...
+/*
+const images = document.querySelectorAll('.feed img');
+
+const lazyLoad = target => {
+  const onEntry = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // console.log(entry.target);
+
+        const image = entry.target;
+        const src = image.dataset.lazy;
+
+        image.src = src;
+        image.classList.add('appear');
+
+        observer.disconnect();
+      }
+    });
+  };
+
+  const options = {
+    rootMargin: '100px',
+  };
+
+  const io = new IntersectionObserver(onEntry, options);
+
+  io.observe(target);
+};
+
+images.forEach(image => lazyLoad(image));
+*/
