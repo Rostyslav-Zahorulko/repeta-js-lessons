@@ -109,26 +109,3 @@ fn(1, 2, 3, 4, 5);
 // ...
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-const a = [101, 302, 503];
-
-const b = a.concat();
-
-console.log(b); // [101, 302, 503]
-console.log(a === b); // false
-
-const c = [...a];
-console.log(c); // [101, 302, 503]
-console.log(a === c); // false
-
-const d = a;
-console.log(d); // [101, 302, 503]
-console.log(a === d); // true
-
-a.push(705);
-console.log(a); // [101, 302, 503, 705]
-console.log(b); // [101, 302, 503]
-console.log(c); // [101, 302, 503]
-console.log(d); // [101, 302, 503, 705]
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

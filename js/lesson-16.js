@@ -259,3 +259,5 @@ const lazyLoad = target => {
 
 images.forEach(image => lazyLoad(image));
 */
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
