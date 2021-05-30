@@ -37,8 +37,8 @@ console.log(objB);
 
 /*
 
-    B                    A                    Object
-    { }          -->     { }          -->     { }          -->    null
+    B                    A                    Object.prototype    
+    { }          -->     { }          -->     { }                 -->    null
     __proto__            __proto__            __proto__
 
 */
