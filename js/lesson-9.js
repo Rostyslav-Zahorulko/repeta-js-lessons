@@ -143,4 +143,8 @@ console.log(poly); // Manager {name: "Pollly", sales: 15}
 
 console.log(poly.__proto__ === Manager.prototype); // true
 
+console.log(Manager.prototype.__proto__ === Object.prototype); // true
+
+console.log(Object.prototype.__proto__); // null
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
